@@ -278,3 +278,7 @@
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
 }
+.purple-btn {
+  background-color: purple;
+  color: white; /* This changes the text color to white */
+}

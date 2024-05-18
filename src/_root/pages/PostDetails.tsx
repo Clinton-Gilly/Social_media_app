@@ -32,6 +32,29 @@ const PostDetails = () => {
     navigate(-1);
   };
 
+  const handleReportPost = async () => {
+    try {
+      const response = await fetch(`${process.env.VITE_APPWRITE_URL}/reports`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          postId: id,
+          reporterId: user.id,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to report post');
+      }
+  
+      alert('Post reported successfully');
+    } catch (error) {
+      console.error(error);
+      alert('Failed to report post');
+    }
+  };
   return (
     <div className="post_details-container">
       <div className="hidden md:flex max-w-5xl w-full">
@@ -47,6 +70,10 @@ const PostDetails = () => {
           />
           <p className="small-medium lg:base-medium">Back</p>
         </Button>
+        <Button onClick={handleReportPost} variant="ghost" className="post_details-report_btn purple-btn">
+       <img src="/path/to/report-icon.svg" alt="Report Post" />
+      
+      </Button>
       </div>
 
       {isLoading || !post ? (
